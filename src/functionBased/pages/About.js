@@ -3,11 +3,11 @@ import SinglePage from "./SinglePage"
 import {Link, useRouteMatch, Route} from "react-router-dom"
 
 const About = (props) => {
-  console.log(useRouteMatch())
   const {url, path} = useRouteMatch()
-  return (<div>
-    <ul>
-      <li>
+  return (
+    <div className="about__content">
+      <ul className="about__list">
+        <li>
         <Link to={`${url}/about-app`}>About App</Link>
       </li>
       <li>
