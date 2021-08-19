@@ -2,6 +2,10 @@ import React, {useState, useEffect} from "react"
 import TodosList from "./TodosList"
 import InputTodo from "./InputTodo"
 import Header from "./Header"
+import Navbar from "./Navbar"
+import About from "../pages/About"
+import NotMatch from "../pages/NotMatch"
+import {Route, Switch} from "react-router-dom"
 import {v4 as uuidv4} from "uuid"
 
 const TodoContainer = () => {
@@ -59,12 +63,27 @@ const TodoContainer = () => {
     localStorage.setItem("todos", temp)
   }, [todos])
 
-  return (<div className="container">
-    <div className="inner">
-      <Header/>
-      <InputTodo addTodoProps={addTodoItem}/>
-      <TodosList todos={todos} handleChangeProps={handleChange} deleteTodoProps={delTodo} setUpdate={setUpdate}/>
-    </div>
-  </div>);
+  return (
+    <>
+      <Navbar/>
+      <Switch>
+        <Route exact path="/">
+          <div className="container">
+            <div className="inner">
+              <Header/>
+              <InputTodo addTodoProps={addTodoItem}/>
+              <TodosList todos={todos} handleChangeProps={handleChange} deleteTodoProps={delTodo} setUpdate={setUpdate}/>
+            </div>
+          </div>
+        </Route>
+        <Route path="/about">
+          <About/>
+        </Route>
+        <Route path="*">
+          <NotMatch/>
+        </Route>
+      </Switch>
+    </>
+  );
 }
 export default TodoContainer
